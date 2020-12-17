@@ -36,7 +36,7 @@ services:
     image: redis:5.0-alpine
 
   elasticsearch:
-    image: markoshust/magento-elasticsearch:7.6.2
+    image: markoshust/magento-elasticsearch:7.6.2-2
     ports:
       - "9200:9200"
       - "9300:9300"
