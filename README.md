@@ -19,24 +19,24 @@
 #### 无示例数据
 
 ```bash
-curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/onelinesetup | bash -s -- magento2.test 2.3.5
+curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/onelinesetup | bash -s -- local.magento.com 2.3.5
 ```
 
 #### 有示例数据
 
 ```bash
-curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/onelinesetup | bash -s -- magento2.test with-samples-2.3.5
+curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/onelinesetup | bash -s -- local.magento.com with-samples-2.3.5
 ```
 
-上面的 `magento2.test` 定义了要使用的域名，而 `2.3.5` 定义了要安装的Magento版本。 请注意，由于我们需要对 `/etc/hosts` 进行写操作以进行DNS解析，因此在设置过程中会提示您输入系统密码。
+上面的 `local.magento.com` 定义了要使用的域名，而 `2.3.5` 定义了要安装的Magento版本。 请注意，由于我们需要对 `/etc/hosts` 进行写操作以进行DNS解析，因此在设置过程中会提示您输入系统密码。
 
 如果你想与Magento一起自动安装示例数据，请在版本前加上 `with-samples-` 。
 
-在上述一行命令完成运行后，你就可以通过`https://magento2.test`访问您的站点。
+在上述一行命令完成运行后，你就可以通过`https://local.magento.com`访问您的站点。
 
 ### 手动安装
 
-和上面运行的命令结果一致，只需将 `magento2.test` 替换成你设置的域名。
+和上面运行的命令结果一致，只需将 `local.magento.com` 替换成你设置的域名。
 
 #### 新项目
 
@@ -62,13 +62,13 @@ bin/download 2.3.5
 # composer create-project --repository=https://repo.magento.com/ --ignore-platform-reqs --prefer-dist magento/project-enterprise-edition=2.4.1 src
 
 # 创建站点主机名:
-echo "127.0.0.1 ::1 magento2.test" | sudo tee -a /etc/hosts
+echo "127.0.0.1 ::1 local.magento.com" | sudo tee -a /etc/hosts
 
 # 运行Magento的安装命令:
-bin/setup magento2.test
+bin/setup local.magento.com
 
 # 访问站点
-open https://magento2.test
+open https://local.magento.com
 ```
 
 #### 现有项目
@@ -82,7 +82,7 @@ cp -R ~/Sites/existing src
 # 或者: git clone git@github.com:myrepo.git src
 
 # 创建站点主机名:
-echo "127.0.0.1 ::1 yoursite.test" | sudo tee -a /etc/hosts
+echo "127.0.0.1 ::1 local.yoursite.com" | sudo tee -a /etc/hosts
 
 # 启动容器命令，将文件复制到里面然后重新启动容器:
 docker-compose up -d
@@ -104,13 +104,13 @@ bin/mysql < backups/magento.sql
 bin/magento app:config:import
 
 # 将原有 URL 设置成本地环境 URL (如果没有在env.php里定义):
-bin/magento config:set web/secure/base_url https://yoursite.test/
-bin/magento config:set web/unsecure/base_url https://yoursite.test/
+bin/magento config:set web/secure/base_url https://local.yoursite.com/
+bin/magento config:set web/unsecure/base_url https://local.yoursite.com/
 
 bin/restart
 
 # 访问站点
-open https://magento2.test
+open https://local.yoursite.com
 ```
 
 ## 升级
@@ -153,10 +153,10 @@ bin/update
 - `bin/restart`: 重新启动所有容器。
 - `bin/root`: 以root用户身份运行任何CLI命令，而无需进入bash提示符。 例如 `bin/root apt-get install nano`
 - `bin/rootnotty`: 以root身份运行任何CLI命令（不带TTY）。 例如 `bin/rootnotty chown -R app:app /var/www/html`
-- `bin/setup`: 从源代码（带有可选域名）安装Magento。 默认为`magento2.test`。 例如 `bin/setup magento2.test`
+- `bin/setup`: 从源代码（带有可选域名）安装Magento。 默认为`magento2.test`。 例如 `bin/setup local.magento.com`
 - `bin/setup-grunt`: 安装和配置Grunt任务运行程序以编译less文件
-- `bin/setup-pwa-studio`: 安装PWA Studio(需要在主机上安装NodeJS和Yarn) 传送到站点，否则默认使用 `master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud` 。 例如 `bin/setup-pwa-studio magento2.test`
-- `bin/setup-ssl`: 为一个或多个域生成SSL证书。 例如 `bin/setup-ssl magento2.test magento3.test`
+- `bin/setup-pwa-studio`: 安装PWA Studio(需要在主机上安装NodeJS和Yarn) 传送到站点，否则默认使用 `master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud` 。 例如 `bin/setup-pwa-studio local.magento.com`
+- `bin/setup-ssl`: 为一个或多个域生成SSL证书。 例如 `bin/setup-ssl local.magento.com ca-local.magento.com`
 - `bin/setup-ssl-ca`: 生成证书CA并将其复制到主机。
 - `bin/start`: 启动所有容器。
 - `bin/status`: 检查容器状态。

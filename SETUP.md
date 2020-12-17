@@ -8,7 +8,7 @@
 2. 将当前的Magento站点的内容提取到 `src` 文件夹中，或composer命令下载Magento源代码启动新项目
     - `bin/download 2.3.5`
 
-3. 使用自定义域名将条目添加到本地主机文件中。 假设您要设置的域是“ magento2.test”，请输入以下内容。
+3. 使用自定义域名将条目添加到本地主机文件中。 假设您要设置的域是 `local.magento.com` ，请输入以下内容。
     - `echo "127.0.0.1 local.magento.com" | sudo tee -a /etc/hosts`
 
 4. 使用本地脚本来启动Docker容器：
