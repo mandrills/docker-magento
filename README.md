@@ -28,7 +28,7 @@ curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/on
 curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/onelinesetup | bash -s -- magento2.test with-samples-2.3.5
 ```
 
-上面的 `magento2.test` 定义了要使用的域名，而 `2.4.1` 定义了要安装的Magento版本。 请注意，由于我们需要对 `/etc/hosts` 进行写操作以进行DNS解析，因此在设置过程中会提示您输入系统密码。
+上面的 `magento2.test` 定义了要使用的域名，而 `2.3.5` 定义了要安装的Magento版本。 请注意，由于我们需要对 `/etc/hosts` 进行写操作以进行DNS解析，因此在设置过程中会提示您输入系统密码。
 
 如果你想与Magento一起自动安装示例数据，请在版本前加上 `with-samples-` 。
 
@@ -45,7 +45,7 @@ curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/on
 curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/template | bash
 
 # 下载使用的Magento版本:
-bin/download 2.4.1
+bin/download 2.3.5
 
 # 如果下载失败，脚本将尝试使用Composer下载Magento
 
@@ -104,16 +104,14 @@ bin/mysql < backups/magento.sql
 bin/magento app:config:import
 
 # 将原有 URL 设置成本地环境 URL (如果没有在env.php里定义):
-bin/magento config:set web/secure/base_url https://xxxxxx.test/
-bin/magento config:set web/unsecure/base_url https://xxxxxx.test/
+bin/magento config:set web/secure/base_url https://yoursite.test/
+bin/magento config:set web/unsecure/base_url https://yoursite.test/
 
 bin/restart
 
 # 访问站点
 open https://magento2.test
 ```
-
-> For more details on how everything works, see the extended [setup readme](https://github.com/markshust/docker-magento/blob/master/SETUP.md).
 
 ## 升级
 
@@ -229,8 +227,6 @@ vm.max_map_count=262144
 ```
 
 ### Blackfire.io
-
-These docker images have built-in support for Blackfire.io. To use it, first register your server ID and token with the Blackfire agent:
 
 Docker映像已经内置支持Blackfire.io。 要使用它请先在Blackfire中注册您的服务器ID和令牌
 
