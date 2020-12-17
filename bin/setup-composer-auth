@@ -7,7 +7,7 @@ NEED_AUTH=false
 hash composer 2>/dev/null && USE_COMPOSER=true
 hash python3 2>/dev/null && USE_PYTHON3=true
 
-[ ! $USE_COMPOSER ] && [ ! $USE_PYTHON3 ] && echo "Failed to setup composer auth, it needs composer or python3" && exit 1
+[ ! $USE_COMPOSER ] && [ ! $USE_PYTHON3 ] && echo "无法设置composer身份验证，它需要composer或python3" && exit 1
 
 # Get composer auth: username and password
 if [ $USE_COMPOSER ]; then
@@ -41,14 +41,14 @@ elif [ $USE_PYTHON3 ]; then
 fi
 
 if [ -n "$PUBLIC_KEY" ] && [ -n "$PRIVATE_KEY" ] && [ $NEED_AUTH = false ]; then
-    echo "Global composer auth already exists" && exit
+    echo "全局composer身份验证已存在" && exit
 fi
 
 # The last chance to enter manually
 if [ -z "$PUBLIC_KEY" ] || [ -z "$PRIVATE_KEY" ]; then
     exec < /dev/tty
     echo
-    echo "    Authentication required (repo.magento.com, public_key and private_key):"
+    echo "    需要验证 (repo.magento.com, public_key and private_key):"
     read -p "        Username: " PUBLIC_KEY
     read -p "        Password: " PRIVATE_KEY
     echo
@@ -56,11 +56,11 @@ if [ -z "$PUBLIC_KEY" ] || [ -z "$PRIVATE_KEY" ]; then
 fi
 
 if [ -z "$PUBLIC_KEY" ] || [ -z "$PRIVATE_KEY" ]; then
-    echo "Please enter composer auth for repo.magento.com" && exit 1
+    echo "请输入repo.magento.com的composer身份验证" && exit 1
 fi
 
 # For docker-compose.yml setting: ~/.composer:/var/www/.composer:cached
-echo "Authentication will add to host composer global config ($GLOBAL_AUTH) for docekr container"
+echo "主机的composer全局配置 ($GLOBAL_AUTH) 身份验证将添加到docker容器"
 if [ $USE_COMPOSER ]; then
     composer global config http-basic.repo.magento.com $PUBLIC_KEY $PRIVATE_KEY
 elif [ $USE_PYTHON3 ]; then
@@ -96,4 +96,4 @@ print(json.dumps(merge(auth, data), indent=4))
     cat "$GLOBAL_AUTH.bak" | python3 -c "$PY3_MERGE_AUTH" > "$GLOBAL_AUTH"
 fi
 
-echo "Success to setup composer auth"
+echo "成功设置composer身份验证"

@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -z "$1" ] && echo "Please specify the version to download (ex. 2.0.0)" && exit
+[ -z "$1" ] && echo "请指定一个下载的版本 (例如 2.3.5)" && exit
 
 edition=${2:-community}
 
@@ -21,11 +21,11 @@ fi
 
 # Final fallback. If no archive exists, let's use Composer!
 if [ ! -f ~/.docker-magento/magento2-$1.tar.gz ]; then
-    echo "Archive not found, or not yet available due to new version release."
-    echo "Attempting install with Composer..."
+    echo "找不到存档或者由于新版本发布而无法使用"
+    echo "尝试使用Compose安装......"
     rm -rf src
     composer create-project --repository=https://repo.magento.com/ --ignore-platform-reqs magento/project-community-edition=$1 src
 else
-    echo "Extracting magento2-$1.tar.gz to ./src"
+    echo "提取 magento2-$1.tar.gz 到 ./src"
     mkdir -p src && tar xzf ~/.docker-magento/magento2-$1.tar.gz -o -C src
 fi

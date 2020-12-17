@@ -3,12 +3,12 @@ if [ "$1" == "disable" ]; then
   bin/cli sed -i -e 's/^zend_extension/\;zend_extension/g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   sleep 1
   bin/restart phpfpm
-  echo "Xdebug has been disabled."
+  echo "Xdebug已禁用"
 elif [ "$1" == "enable" ]; then
   bin/cli sed -i -e 's/^\;zend_extension/zend_extension/g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   sleep 1
   bin/restart phpfpm
-  echo "Xdebug has been enabled."
+  echo "Xdebug已启用"
 else
-  echo "Please specify either 'enable' or 'disable' as an argument"
+  echo "请指定 'enable' 或 'disable' 作为参数"
 fi

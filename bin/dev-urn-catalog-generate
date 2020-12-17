@@ -3,4 +3,4 @@ bin/magento dev:urn-catalog:generate misc.xml
 bin/copyfromcontainer misc.xml
 mv src/misc.xml src/.idea/misc.xml 
 
-echo "URN's have been generated, you may now restart PHPStorm"
+echo "已生成URN，您现在可以重新启动PHPStorm"

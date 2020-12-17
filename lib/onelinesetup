@@ -6,7 +6,7 @@ EDITION=${3:-community}
 curl -s https://raw.githubusercontent.com/mandrills/docker-magento/master/lib/template | bash
 bin/download $VERSION $EDITION
 
-echo "Your system password has been requested to add an entry to /etc/hosts..."
+echo "请输入系统密码才能将条目添加到/etc/hosts......"
 echo "127.0.0.1 ::1 $DOMAIN" | sudo tee -a /etc/hosts
 
 bin/setup $DOMAIN

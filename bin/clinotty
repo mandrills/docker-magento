@@ -1,3 +1,3 @@
 #!/bin/bash
-[ -z "$1" ] && echo "Please specify a CLI command (ex. ls)" && exit
+[ -z "$1" ] && echo "请指定一个Cli命令 (例如 ls)" && exit
 docker-compose exec -T phpfpm "$@"

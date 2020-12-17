@@ -5,4 +5,4 @@ rm -rf .git
 rsync -av ./ ../
 cd ..
 rm -rf tmpupdate
-echo "docker-magento has been updated, run bin/restart to apply the updates"
+echo "docker-magento 已更新完成, 运行 bin/restart 命令以便应用更新"

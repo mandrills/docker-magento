@@ -1,6 +1,6 @@
 #!/bin/bash
-DEFAULT_THEME_ID="select value from core_config_data where path = 'design/theme/theme_id'"
-THEME_PATH="select theme_path from theme where theme_id in ($DEFAULT_THEME_ID);"
+DEFAULT_THEME_ID="从core_config_data表中选择value, 其中path = 'design/theme/theme_id'"
+THEME_PATH="从theme表中选择theme_path, 其中theme_id等于($DEFAULT_THEME_ID);"
 VENDOR_THEME=`bin/n98-magerun2 db:query "$THEME_PATH" | sed -n 2p | cut -d$'\r' -f1`
 THEME=`echo $VENDOR_THEME | cut -d'/' -f2`
 
@@ -24,11 +24,11 @@ fs.writeFileSync('./dev/tools/grunt/configs/local-themes.js', '"use strict"; mod
 EOM
 
 if [ -z "$VENDOR_THEME" ] || [ -z "$THEME" ]; then
-    echo "Using Magento/luma theme for grunt config"
+    echo "使用Magento/luma主题进行grunt配置"
     THEME=luma
     bin/clinotty cp ./dev/tools/grunt/configs/themes.js ./dev/tools/grunt/configs/local-themes.js
 else
-    echo "Using $VENDOR_THEME theme for grunt config"
+    echo "使用($VENDOR_THEME)主题进行grunt配置"
     bin/node -e "$GEN_THEME_JS"
 fi
 
